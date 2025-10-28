@@ -1,0 +1,129 @@
+################################################################################
+# HardcoreRevival configuration file
+#
+# This file contains all configurable values for the HardcoreRevival plugin.
+# Each option is documented inline. Reload the plugin with /hrreload after
+# making changes to apply new settings.
+################################################################################
+
+settings:
+  # Drop the player’s head on death. The head will be bound to the deceased
+  # player and include lore marking it as a revival token. If disabled, no head
+  # is dropped on death.
+  dropHeadOnDeath: true
+
+  # Require the exact altar structure as described in the documentation.
+  # If false, the plugin will still attempt to consume items and revive
+  # players but will not verify the gold blocks or chest layout. It is
+  # recommended to leave this enabled to prevent exploits.
+  requireExactStructure: true
+
+  # Whether to consume the placed head and chest items on a successful revival.
+  # If false, items remain in the chests and the head remains.
+  consumeItems: true
+
+  # Spawn lightning as a visual effect without causing damage or fire. If false
+  # the lightning will deal damage and potentially start fires. It is
+  # recommended to leave this enabled to avoid harming nearby players or
+  # structures.
+  lightningNoDamage: true
+
+  # Allow reviving players who are offline. When enabled, if the target of a
+  # revival attempt is offline, they will be marked pending and resurrected
+  # automatically on their next login. When disabled, offline players cannot
+  # be revived.
+  enableOfflineRevive: true
+
+  # Cooldown per altar location in seconds. After a successful revival, that
+  # altar cannot be used again until this time has passed. A value of 0
+  # disables cooldowns entirely.
+  cooldownSeconds: 30
+
+  # List of worlds in which revivals are allowed. If empty, all worlds are
+  # allowed except those listed in worldBlacklist. Use the exact world name.
+  worldWhitelist: []
+
+  # List of worlds where revivals are not allowed. Ignored if worldWhitelist
+  # contains values. Use this to block specific worlds such as creative worlds.
+  worldBlacklist: []
+
+  # Minimum and maximum Y-levels (inclusive) at which altars are permitted.
+  # Structures outside this vertical range will be rejected.
+  yMin: 0
+  yMax: 320
+
+recipe:
+  # The display name for the crafted blank head item. Players must rename the
+  # blank head in an anvil to the exact name of the dead player (case
+  # insensitive) for it to function in the altar.
+  outputName: "&fBlank Revival Head"
+
+messages:
+  # Prefix appended to the beginning of all plugin messages.
+  prefix: "&6[HardcoreRevival]&r "
+
+  errors:
+    notOnFence: "&cYou must place the head on top of a fence over the altar."
+    structureInvalid: "&cThe altar structure is invalid."
+    chestMissingItems: "&cOne or more chests are missing the required Totem of Undying or Wither Rose."
+    headNotNamed: "&cThe head is not properly named for a dead player."
+    playerNotDead: "&cThat player is not dead or pending revival."
+    worldNotAllowed: "&cYou cannot perform a revival in this world."
+    cooldownActive: "&cThis altar was used recently. Please wait before trying again."
+    unknownPlayer: "&cNo matching player found for that name."
+
+  success:
+    revive: "&a{player} has been revived!"
+
+  command:
+    reload: "&aHardcoreRevival configuration reloaded."
+    checkAlive: "&e{player} is alive."
+    checkDead: "&c{player} is dead (spectator)."
+    checkPending: "&6{player} is pending revival."
+
+# Sound effect sequence for a successful revival. Each entry defines the sound,
+# its volume, pitch and the delay (in ticks) after the previous sound. Set
+# delay to 0 to play immediately. See the Paper/Paper API for available
+# sound names.
+sounds:
+  - sound: BLOCK_BEACON_ACTIVATE
+    volume: 1.0
+    pitch: 1.0
+    delay: 0
+  - sound: ENTITY_WARDEN_HEARTBEAT
+    volume: 1.0
+    pitch: 1.0
+    delay: 10
+  - sound: ITEM_TOTEM_USE
+    volume: 1.0
+    pitch: 1.0
+    delay: 20
+  - sound: ENTITY_LIGHTNING_BOLT_THUNDER
+    volume: 1.0
+    pitch: 1.0
+    delay: 30
+
+# Particle effects to display during a successful revival. Each entry defines
+# the particle type, how many particles to spawn and the offsets relative to
+# the altar centre. Adjust counts to suit performance and visual preference.
+particles:
+  - type: TOTEM_OF_UNDYING
+    count: 50
+    offsetX: 0.5
+    offsetY: 1.0
+    offsetZ: 0.5
+  - type: SOUL
+    count: 30
+    offsetX: 0.5
+    offsetY: 1.0
+    offsetZ: 0.5
+  - type: ENCHANTMENT_TABLE
+    count: 20
+    offsetX: 0.5
+    offsetY: 1.0
+    offsetZ: 0.5
+  - type: FLASH
+    count: 1
+    offsetX: 0.0
+    offsetY: 0.0
+    offsetZ: 0.0

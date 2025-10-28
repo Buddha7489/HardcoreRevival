@@ -1,0 +1,17 @@
+name: HardcoreRevival
+main: com.yourorg.hardcorerevival.HardcoreRevivalPlugin
+version: 1.0.0
+api-version: "1.21"
+commands:
+  hrreload:
+    description: Reloads HardcoreRevival configuration.
+    usage: /<command>
+    permission: hardcorerevival.admin
+  hrcheck:
+    description: Checks whether a player is dead or pending revive.
+    usage: /<command> [player]
+    permission: hardcorerevival.admin
+permissions:
+  hardcorerevival.admin:
+    description: Allows use of HardcoreRevival admin commands.
+    default: op
